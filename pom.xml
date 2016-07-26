@@ -10,27 +10,35 @@
 	<description>Projeto open source de componentes de software para o domínio de negócios do Brasil.</description>
 	<url>http://www.jrimum.org/utilix</url>
 
-	<licenses>
-		<license>
-			<name>The Apache Software License, Version 2.0</name>
-			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-			<distribution>repo</distribution>
-		</license>
-	</licenses>
-
 	<organization>
-		<name>Projeto JRimum</name>
-		<url>http://www.jrimum.org</url>
+		<name>WBA Software Corporativo LTDA</name>
+		<url>http://www.wba.com.br/</url>
 	</organization>
 
 	<issueManagement>
 		<system>GitHub</system>
-		<url>https://github.com/jrimum/utilix/issues</url>
+		<url>https://github.com/khaslu/utilix/issues</url>
 	</issueManagement>
 
 	<scm>
-		<url>http://github.com/jrimum/utilix</url>
+		<connection>scm:git:git@github.com:khaslu/utilix.git</connection>
+		<url>scm:git:git@github.com:khaslu/utilix.git</url>
+		<developerConnection>scm:git:git@github.com:khaslu/utilix.git</developerConnection>
+		<tag>HEAD</tag>
 	</scm>
+	
+	<distributionManagement>
+		<repository>
+			<id>nexus-wba</id>
+			<name>WBA :: Releases</name>
+			<url>http://dev.wba.com.br:8081/repository/maven-releases/</url>
+		</repository>
+		<snapshotRepository>
+			<id>nexus-wba</id>
+			<name>WBA :: Snapshots</name>
+			<url>http://dev.wba.com.br:8081/repository/maven-snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
 
 	<developers>
 		<developer>
@@ -64,46 +72,6 @@
 				</configuration>
 			</plugin>
 			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>animal-sniffer-maven-plugin</artifactId>
-				<version>1.6</version>
-				<configuration>
-					<signature>
-						<groupId>org.codehaus.mojo.signature</groupId>
-						<artifactId>java15</artifactId>
-						<version>1.0</version>
-					</signature>
-				</configuration>
-				<executions>
-					<execution>
-						<id>animal-sniffer</id>
-						<phase>compile</phase>
-						<goals>
-							<goal>check</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<artifactId>maven-assembly-plugin</artifactId>
-				<version>2.4</version>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.16</version>
-				<configuration>
-					<skipTests>false</skipTests>
-					<includes>
-						<include>org/jrimum/utilix/**/*</include>
-					</includes>
-					<excludes>
-						<exclude>org/jrimum/utilix/excludes/**/*</exclude>
-						<exclude>org/jrimum/utilix/**/*$*</exclude>
-					</excludes>
-				</configuration>
-			</plugin>
-			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
 				<version>2.2.1</version>
@@ -119,28 +87,16 @@
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.9.1</version>
-				<executions>
-					<execution>
-						<id>attach-javadoc</id>
-						<phase>package</phase>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
-				 <configuration>
-			        <charset>UTF-8</charset>
-					<docencoding>UTF-8</docencoding>
-					<docfilessubdirs>true</docfilessubdirs>
-					<show>private</show>
-		    	</configuration>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<version>2.8.1</version>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-deploy-plugin</artifactId>
-				<version>2.8.1</version>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.5.3</version>
+				<configuration>
+					<tagNameFormat>v@{project.version}</tagNameFormat>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
@@ -183,22 +139,5 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-	
-	<repositories>
-		<repository>
-			<id>jrimum.org</id>
-			<url>http://jrimum.org/maven/content/groups/public/</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
-
-	<distributionManagement>
-		<snapshotRepository>
-			<id>org.jrimum.snapshots</id>
-			<url>http://jrimum.org/maven/content/repositories/org.jrimum.snapshots/</url>
-		</snapshotRepository>
-	</distributionManagement>
 
 </project>
